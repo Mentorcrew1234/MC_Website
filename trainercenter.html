@@ -1,0 +1,227 @@
+<!-- ================================================================= -->
+<!-- MENTORCREW - "Why Choose MentorCrew?" (PACE Section)              -->
+<!-- Standalone Code Snippet for Zoho TrainerCentral                   -->
+<!-- ================================================================= -->
+
+<div class="mentorcrew-trainercenter">
+  <style>
+    /* Scoped container and reset */
+    .mentorcrew-trainercenter {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", sans-serif;
+      box-sizing: border-box;
+      width: 100%;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mentorcrew-trainercenter *,
+    .mentorcrew-trainercenter *::before,
+    .mentorcrew-trainercenter *::after {
+      box-sizing: border-box;
+    }
+
+    .mentorcrew-trainercenter .section-container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .mentorcrew-trainercenter .pace-section {
+      padding: 3rem 0;
+    }
+
+    .mentorcrew-trainercenter .section-title {
+      font-size: 2.5rem;
+      font-weight: 550;
+      text-align: center;
+      margin: 0 0 1rem 0;
+      color: #0b1f3a;
+      line-height: 1.25;
+    }
+
+    .mentorcrew-trainercenter .text-gradient {
+      background: linear-gradient(135deg, #0284c7 0%, #00bcd4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .mentorcrew-trainercenter .section-subtitle {
+      text-align: center;
+      font-size: 1.25rem;
+      color: #666;
+      margin: 0 0 4rem 0;
+      line-height: 1.6;
+    }
+
+    .mentorcrew-trainercenter .section-subtitle strong {
+      color: inherit;
+      font-weight: 700;
+    }
+
+    .mentorcrew-trainercenter .pace-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .mentorcrew-trainercenter .pace-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(33, 150, 243, 0.1);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mentorcrew-trainercenter .pace-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #2196F3, #3F51B5, #9C27B0);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .mentorcrew-trainercenter .pace-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(33, 150, 243, 0.2);
+    }
+
+    .mentorcrew-trainercenter .pace-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .mentorcrew-trainercenter .pace-icon {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 1.5rem;
+      border-radius: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(33, 150, 243, 0.3);
+      flex-shrink: 0;
+    }
+
+    .mentorcrew-trainercenter .pace-icon video {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mentorcrew-trainercenter .pace-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #212121;
+      margin: 0 0 1rem 0;
+      line-height: 1.3;
+    }
+
+    .mentorcrew-trainercenter .pace-card-desc {
+      color: #616161;
+      line-height: 1.7;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    /* Responsive adjustments matching MentorCrew */
+    @media (max-width: 640px) {
+      .mentorcrew-trainercenter .section-title {
+        font-size: 2rem;
+      }
+      .mentorcrew-trainercenter .section-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 2.5rem;
+      }
+      .mentorcrew-trainercenter .pace-card {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+
+  <section class="pace-section" id="why-choose-mentorcrew">
+    <div class="section-container">
+      <h2 class="section-title">
+        Why Choose <span class="text-gradient">MentorCrew?</span>
+      </h2>
+      <p class="section-subtitle">
+        We promise <strong>PACE</strong> in our trainings - Experience excellence through our comprehensive training methodology
+      </p>
+
+      <div class="pace-grid">
+        <!-- Letter P -->
+        <div class="pace-card">
+          <div class="pace-icon" style="background: linear-gradient(135deg, #2196F3, #00BCD4);">
+            <video
+              src="https://www.mentorcrew.co/letter-p.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+            ></video>
+          </div>
+          <h3 class="pace-card-title">Personalized Focus</h3>
+          <p class="pace-card-desc">Tailored learning paths designed specifically for your unique career goals and learning style</p>
+        </div>
+
+        <!-- Letter A -->
+        <div class="pace-card">
+          <div class="pace-icon" style="background: linear-gradient(135deg, #3F51B5, #2196F3);">
+            <video
+              src="https://www.mentorcrew.co/letter-a.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+            ></video>
+          </div>
+          <h3 class="pace-card-title">Applied Learning</h3>
+          <p class="pace-card-desc">Hands-on practical experience with real-world projects and industry-relevant case studies</p>
+        </div>
+
+        <!-- Letter C -->
+        <div class="pace-card">
+          <div class="pace-icon" style="background: linear-gradient(135deg, #9C27B0, #3F51B5);">
+            <video
+              src="https://www.mentorcrew.co/letter-c.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+            ></video>
+          </div>
+          <h3 class="pace-card-title">Career Assistance</h3>
+          <p class="pace-card-desc">Comprehensive support including resume building, interview preparation, and job placement</p>
+        </div>
+
+        <!-- Letter E -->
+        <div class="pace-card">
+          <div class="pace-icon" style="background: linear-gradient(135deg, #E91E63, #9C27B0);">
+            <video
+              src="https://www.mentorcrew.co/letter-e.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+            ></video>
+          </div>
+          <h3 class="pace-card-title">Extended Query Assistance</h3>
+          <p class="pace-card-desc">Continuous mentorship and support even after course completion for long-term success</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

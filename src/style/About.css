@@ -1,0 +1,59 @@
+  .about-container {
+    max-width: 900px;
+    margin: 50px auto;
+    /* text-align: justify;  */
+    /* text-align-last: center;  */
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    /* margin-top: 20px; */
+    padding-top: 15px;
+
+  }
+  
+  .about-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .about-container p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #444;
+    text-align: justify; 
+    margin-top: 4%;
+  }
+  
+  /* Content Tabs */
+  .content-tabs {
+    margin-top: 40px;
+  }
+  
+  .content-tabs .ant-tabs-nav::before {
+    border-bottom: 1px solid white;
+  }
+  
+  .tab-label {
+    font-size: 20px;
+    padding: 0 10px;
+    font-weight: bold;
+  }
+  
+  .mission-icon {
+    color: #0073e6;
+    margin-right: 8px;
+  }
+
+  .tab-icon {
+    color: #0073e6;
+    margin-right: 8px;
+  }
+  
+  .content-paragraph {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  
+  .mt-20 {
+    margin-top: 20px;
+  }
