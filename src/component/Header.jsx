@@ -819,22 +819,11 @@ const Header = ({ onNavigate, onTalkToUs, currentPath = '/', entranceStage = 'co
     }
   }, [currentPath]);
 
-  // Scroll visibility handling
+  // Scroll handling: keep scrolled state for floating glass elevation while header stays permanently visible
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setScrolled(currentScrollY > 50);
-
-      const diff = currentScrollY - lastScrollY.current;
-      // Small threshold to ignore micro-jitter
-      if (Math.abs(diff) < 5) return;
-
-      if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
-        setShowHeader(false);
-      } else if (currentScrollY < lastScrollY.current) {
-        setShowHeader(true);
-      }
-
       lastScrollY.current = currentScrollY;
     };
 
@@ -989,30 +978,23 @@ const Header = ({ onNavigate, onTalkToUs, currentPath = '/', entranceStage = 'co
   return (
     <>
       <style>{`
+
         .modern-header {
           position: fixed;
-          top: 1rem;
+          top: 0;
           left: 0;
           width: 100%;
-          z-index: 50;
-          transition: all 0.4s ease;
+          z-index: 1000;
           background: transparent;
-          padding: 0 1.5rem;
+          padding: 1rem 1.5rem 0;
           pointer-events: none;
+          box-sizing: border-box;
         }
 
-        .header-visible {
+        .header-visible,
+        .header-hidden {
           transform: translateY(0);
           opacity: 1;
-          transition:
-            transform 0.4s ease,
-            opacity 0.4s ease;
-        }
-
-        .header-hidden {
-          transform: translateY(-130%);
-          opacity: 0;
-          pointer-events: none;
           transition:
             transform 0.4s ease,
             opacity 0.4s ease;
@@ -1357,8 +1339,8 @@ const Header = ({ onNavigate, onTalkToUs, currentPath = '/', entranceStage = 'co
           }
 
           .modern-header {
-            top: 0.5rem;
-            padding: 0 0.75rem;
+            padding: 0.5rem 0.75rem 0;
+            box-sizing: border-box;
           }
 
           .logo-img {

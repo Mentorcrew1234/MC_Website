@@ -1079,48 +1079,80 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
       <section className="mentorcrew-story-section">
         <div className="story-section-bg-glow" />
 
-        {/* ABOUT MENTORCREW UNIFIED SECTION (CONTENT + WHEEL VIDEO + ARROW IN ONE CONTINUOUS SECTION) */}
+        {/* ABOUT MENTORCREW OPEN SECTION (FULL WIDTH, 2-COLUMN: STORY ON LEFT + LARGE FLYWHEEL ON RIGHT) */}
         <div className="section-container story-about-wrapper" id="about-mentorcrew">
           <div
-            className="story-about-card story-reveal-about is-visible"
+            className="story-about-container story-reveal-about is-visible"
             ref={aboutRef}
           >
-            {/* About Editorial Introduction */}
-            <div className="story-about-header">
-              <span className="story-eyebrow">ABOUT MENTORCREW</span>
-              <h2 className="story-main-heading">
-                Building the workforce <span className="text-gradient">of tomorrow.</span>
-              </h2>
-            </div>
-            <p className="story-about-text">
-              MentorCrew envisions what India envisions for its current and future workforce - Addressing the Employability Gap and building a qualified and sustainable workforce to meet global demands. MentorCrew endeavors to contribute to this collective vision with its refreshing ideas, proven and improved pedagogical practices and championing innovative and practical approaches to skill development. We at MentorCrew strongly believe that scalability and agility in our solutions can receive a positive stimulus effect by building and leveraging IT tools and digital platforms.
-            </p>
+            <div className="story-about-split-layout">
+              {/* LEFT COLUMN: ABOUT STORY & THREE P's (~45%) */}
+              <div className="story-about-content-col">
+                <div className="story-about-header">
+                  <span className="story-eyebrow">ABOUT MENTORCREW</span>
+                  <h2 className="story-main-heading">
+                    Building the workforce <span className="text-gradient">of tomorrow.</span>
+                  </h2>
+                </div>
+                <p className="story-about-text">
+                  MentorCrew envisions what India envisions for its current and future workforce - Addressing the Employability Gap and building a qualified and sustainable workforce to meet global demands. MentorCrew endeavors to contribute to this collective vision with its refreshing ideas, proven and improved pedagogical practices and championing innovative and practical approaches to skill development. We at MentorCrew strongly believe that scalability and agility in our solutions can receive a positive stimulus effect by building and leveraging IT tools and digital platforms.
+                </p>
 
-            {/* Visual Row: Wheel Video + Growth Arrow inside the same About Section */}
-            <div className="story-ecosystem-grid">
-              {/* LEFT: WHEEL VIDEO CARD */}
-              <div className="story-ecosystem-card story-ecosystem-wheel-card">
-                <video
-                  src="/wheel video.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="story-wheel-video"
-                />
-              </div>
-
-              {/* RIGHT: GROWTH ARROW CARD */}
-              <div className="story-ecosystem-card story-ecosystem-arrow-card">
-                <div className="story-arrow-wrapper">
-                  <img
-                    src="/arrow.png"
-                    alt="Good to Great Growth Arrow - Each arm feeds the next, compounding growth"
-                    className="story-ecosystem-img story-ecosystem-arrow-img"
-                    loading="lazy"
-                  />
+                {/* People / Purpose / Progress Row */}
+                <div className="story-three-p-row">
+                  <div className="story-three-p-item">
+                    <span className="story-three-p-label">PEOPLE</span>
+                    <span className="story-three-p-title">
+                      Empowering
+                      <br />
+                      Talent
+                    </span>
+                  </div>
+                  <div className="story-three-p-item">
+                    <span className="story-three-p-label">PURPOSE</span>
+                    <span className="story-three-p-title">
+                      Driving
+                      <br />
+                      Opportunities
+                    </span>
+                  </div>
+                  <div className="story-three-p-item">
+                    <span className="story-three-p-label">PROGRESS</span>
+                    <span className="story-three-p-title">
+                      Creating
+                      <br />
+                      Impact
+                    </span>
+                  </div>
                 </div>
               </div>
+
+              {/* RIGHT COLUMN: LARGE DOMINANT FLYWHEEL VISUAL (~55%) */}
+              <div className="story-about-visual-col">
+                <div className="story-flywheel-hero-wrap">
+                  <div className="story-flywheel-graphic-container">
+                    <img
+                      src="/wheel.png"
+                      alt="MentorCrew Ecosystem Flywheel - Learning & Development, Staffing, Products HR & L&D"
+                      className="story-flywheel-img-hero"
+                      loading="lazy"
+                    />
+                    <div className="story-flywheel-center-logo">
+                      <img
+                        src="/m_logo.png"
+                        alt="MentorCrew Logo"
+                        className="story-flywheel-center-m-icon"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Preserved underlying video & arrow assets in codebase */}
+            <div className="story-arrow-preserved-asset" style={{ display: 'none' }} aria-hidden="true">
+              <video src="/wheel video.mp4" muted playsInline />
+              <img src="/arrow.png" alt="Growth Arrow" />
             </div>
           </div>
         </div>

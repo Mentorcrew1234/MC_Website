@@ -14,10 +14,13 @@
 .modern-header {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  z-index: 50;
-  transition: all 0.5s ease;
+  z-index: 1000;
   background: transparent;
+  padding: 1rem 1.5rem 0;
+  pointer-events: none;
+  box-sizing: border-box;
 }
 
 .modern-header.scrolled {
@@ -26,18 +29,10 @@
   box-shadow: none;
 }
 
-.header-visible {
+.header-visible,
+.header-hidden {
   transform: translateY(0);
   opacity: 1;
-  transition:
-    transform 0.4s ease,
-    opacity 0.4s ease;
-}
-
-.header-hidden {
-  transform: translateY(-130%);
-  opacity: 0;
-  pointer-events: none;
   transition:
     transform 0.4s ease,
     opacity 0.4s ease;
@@ -431,7 +426,7 @@
   font-weight: 800;
   letter-spacing: -0.025em;
   line-height: 1.22;
-  color: #000000;
+  color: #01020f;
   margin: 0 0 0.72rem;
   max-width: 100%;
   text-align: left;
@@ -516,44 +511,52 @@
   z-index: 0;
 }
 
-/* 1. ABOUT MENTORCREW — COMPACT EDITORIAL INTRODUCTION */
+/* 1. ABOUT MENTORCREW — OPEN FULL-WIDTH HERO SECTION */
+.story-about-wrapper.section-container,
 .story-about-wrapper {
   position: relative;
   z-index: 1;
   width: 100%;
+  max-width: 100% !important;
+  padding-left: clamp(1.5rem, 5vw, 5.5rem);
+  padding-right: clamp(1.5rem, 5vw, 5.5rem);
+  padding-top: clamp(1.5rem, 3vw, 3rem);
+  padding-bottom: clamp(3rem, 4vw, 4.5rem);
   margin-bottom: 0;
   scroll-margin-top: 100px;
-}
-
-.story-about-card {
-  position: relative;
-  max-width: 1280px;
-  margin: 0 auto;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.40);
-  backdrop-filter: blur(20px) saturate(135%);
-  -webkit-backdrop-filter: blur(20px) saturate(135%);
-  border: 1px solid rgba(255, 255, 255, 0.70);
-  border-radius: 28px;
-  padding: clamp(2.25rem, 3.5vw, 3.25rem) clamp(1.5rem, 3vw, 3rem);
-  box-shadow: 0 20px 50px rgba(40, 100, 150, 0.08),
-              inset 0 1px 0 rgba(255, 255, 255, 0.90);
-  transition: box-shadow 0.4s ease, border-color 0.4s ease;
   box-sizing: border-box;
 }
 
+.story-about-container,
+.story-about-card {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  text-align: left;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+.story-about-container:hover,
 .story-about-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 24px 60px rgba(33, 150, 243, 0.12),
-              inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transform: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 .story-about-header {
   margin-bottom: 1.25rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .story-eyebrow {
@@ -572,13 +575,14 @@
 }
 
 .story-main-heading {
-  font-size: clamp(2.1rem, 3vw, 2.75rem);
+  font-size: clamp(2.3rem, 3.5vw, 3.4rem);
   font-weight: 800;
   color: #0b1f3a;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
   margin: 0;
-  max-width: 760px;
+  max-width: 620px;
+  text-align: left;
 }
 
 .story-main-heading .text-gradient {
@@ -589,12 +593,123 @@
 }
 
 .story-about-text {
-  font-size: 1.05rem;
+  font-size: clamp(1rem, 1.1vw, 1.06rem);
   color: #334155;
   line-height: 1.75;
-  margin: 0 auto;
-  max-width: 860px;
-  text-align: center;
+  margin: 1.25rem 0 0;
+  max-width: 600px;
+  text-align: left;
+}
+
+/* ==================================================
+   PEOPLE / PURPOSE / PROGRESS ROW
+================================================== */
+.story-three-p-row {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1.75rem, 3vw, 3rem);
+  margin-top: clamp(2rem, 3vw, 2.75rem);
+  padding-top: clamp(1.25rem, 2vw, 1.75rem);
+  border-top: 1px solid rgba(2, 132, 199, 0.16);
+  width: 100%;
+}
+
+.story-three-p-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.story-three-p-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #0284c7;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+}
+
+.story-three-p-title {
+  font-size: clamp(1.02rem, 1.25vw, 1.25rem);
+  font-weight: 700;
+  color: #0b1f3a;
+  line-height: 1.25;
+}
+
+/* ==================================================
+   ABOUT MENTORCREW: 2-COLUMN SPLIT LAYOUT
+   Left: Content & Editorial (~42-45%)
+   Right: Large Dominant Flywheel Visual (~55-58%)
+================================================== */
+.story-about-split-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.story-about-content-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 640px;
+}
+
+.story-about-visual-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.story-flywheel-hero-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.story-flywheel-graphic-container {
+  position: relative;
+  width: 100%;
+  max-width: 950px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.story-flywheel-img-hero {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 18px 45px rgba(11, 31, 58, 0.08));
+  transition: transform 0.5s ease;
+}
+
+.story-flywheel-center-logo {
+  position: absolute;
+  top: 57.2%;
+  left: 49.9%;
+  transform: translate(-50%, -50%);
+  width: 5.8%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.story-flywheel-center-m-icon {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
 }
 
 /* Minimal Active Story Indicator — completely hidden */
@@ -829,6 +944,7 @@
 ================================================== */
 
 /* 1. About MentorCrew Box */
+.story-about-container.story-reveal-about,
 .story-about-card.story-reveal-about,
 .story-reveal-about {
   opacity: 1 !important;
@@ -836,11 +952,11 @@
   visibility: visible !important;
 }
 
+.story-about-container:hover,
 .story-about-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 24px 60px rgba(33, 150, 243, 0.12),
-              inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transform: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 /* 2. Mission Box: Fully visible normal content */
@@ -1726,13 +1842,30 @@
 }
 
 @media (max-width: 1024px) {
+  .story-about-wrapper.section-container,
   .story-about-wrapper {
+    padding-left: 2rem;
+    padding-right: 2rem;
     margin-bottom: 0;
   }
 
+  .story-about-container,
   .story-about-card {
-    padding: 2.25rem 1.75rem;
+    padding: 0 !important;
     max-width: 100%;
+  }
+
+  .story-about-split-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .story-about-content-col {
+    max-width: 100%;
+  }
+
+  .story-flywheel-graphic-container {
+    max-width: 700px;
   }
 
   .story-ecosystem-grid {
@@ -1917,14 +2050,43 @@
     overflow: clip;
   }
 
+  .story-about-wrapper.section-container,
   .story-about-wrapper {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
     margin-bottom: 0;
   }
 
+  .story-about-container,
   .story-about-card {
-    padding: 1.85rem 1.25rem;
-    border-radius: 22px;
+    padding: 0 !important;
+    border-radius: 0;
     width: 100%;
+  }
+
+  .story-about-split-layout {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .story-about-content-col {
+    order: 1;
+    max-width: 100%;
+  }
+
+  .story-about-visual-col {
+    order: 2;
+  }
+
+  .story-three-p-row {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+  }
+
+  .story-flywheel-graphic-container {
+    max-width: 100%;
   }
 
   .story-ecosystem-grid {
