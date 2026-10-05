@@ -490,7 +490,7 @@
   position: relative;
   margin-top: 0;
   z-index: 20;
-  padding: 4.5rem 0 clamp(80px, 7vw, 100px);
+  padding: clamp(2rem, 3vw, 3rem) 0 clamp(60px, 5vw, 80px);
   background:
     radial-gradient(ellipse 65% 45% at 20% 15%, rgba(56, 189, 248, 0.09) 0%, transparent 60%),
     radial-gradient(ellipse 60% 45% at 85% 75%, rgba(47, 224, 198, 0.08) 0%, transparent 60%),
@@ -516,14 +516,20 @@
 .story-about-wrapper {
   position: relative;
   z-index: 1;
+
   width: 100%;
   max-width: 100% !important;
+
   padding-left: clamp(1.5rem, 5vw, 5.5rem);
   padding-right: clamp(1.5rem, 5vw, 5.5rem);
-  padding-top: clamp(1.5rem, 3vw, 3rem);
-  padding-bottom: clamp(3rem, 4vw, 4.5rem);
-  margin-bottom: 0;
-  scroll-margin-top: 100px;
+
+padding-top: 0;
+
+  /* Small controlled spacing before Mission/Vision */
+  padding-bottom: clamp(1.5rem, 2vw, 2.5rem);
+
+  margin-bottom: 0 !important;
+
   box-sizing: border-box;
 }
 
@@ -602,7 +608,7 @@
 }
 
 /* ==================================================
-   PEOPLE / PURPOSE / PROGRESS ROW
+   PEOPLE / PURPOSE / PROGRESS ROW & ENTRANCE ANIMATION
 ================================================== */
 .story-three-p-row {
   display: flex;
@@ -618,22 +624,92 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
 }
 
-.story-three-p-label {
+/* Subtle desktop-only hover interaction */
+@media (hover: hover) and (pointer: fine) {
+  .story-three-p-item:hover {
+    transform: translateY(-3px);
+  }
+
+  .story-three-p-item:hover .story-three-p-label {
+    color: #0369a1;
+    letter-spacing: 0.16em;
+  }
+}
+
+/* Initial state before scroll reveal */
+.story-three-p-item .story-three-p-label {
   font-size: 0.74rem;
   font-weight: 700;
   color: #0284c7;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   margin-bottom: 0.45rem;
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s ease,
+              letter-spacing 0.25s ease;
+  will-change: opacity;
 }
 
-.story-three-p-title {
+.story-three-p-item .story-three-p-title {
   font-size: clamp(1.02rem, 1.25vw, 1.25rem);
   font-weight: 700;
   color: #0b1f3a;
   line-height: 1.25;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Entrance reveal when About section enters viewport */
+.story-three-p-row.is-visible .story-three-p-item .story-three-p-label,
+.story-about-container.is-visible .story-three-p-item .story-three-p-label {
+  opacity: 1;
+}
+
+.story-three-p-row.is-visible .story-three-p-item .story-three-p-title,
+.story-about-container.is-visible .story-three-p-item .story-three-p-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger sequence: PEOPLE (0s) -> PURPOSE (0.18s) -> PROGRESS (0.36s) */
+.story-three-p-row.is-visible .story-three-p-item:nth-child(1) .story-three-p-label,
+.story-three-p-row.is-visible .story-three-p-item:nth-child(1) .story-three-p-title,
+.story-about-container.is-visible .story-three-p-item:nth-child(1) .story-three-p-label,
+.story-about-container.is-visible .story-three-p-item:nth-child(1) .story-three-p-title {
+  transition-delay: 0.05s;
+}
+
+.story-three-p-row.is-visible .story-three-p-item:nth-child(2) .story-three-p-label,
+.story-three-p-row.is-visible .story-three-p-item:nth-child(2) .story-three-p-title,
+.story-about-container.is-visible .story-three-p-item:nth-child(2) .story-three-p-label,
+.story-about-container.is-visible .story-three-p-item:nth-child(2) .story-three-p-title {
+  transition-delay: 0.22s;
+}
+
+.story-three-p-row.is-visible .story-three-p-item:nth-child(3) .story-three-p-label,
+.story-three-p-row.is-visible .story-three-p-item:nth-child(3) .story-three-p-title,
+.story-about-container.is-visible .story-three-p-item:nth-child(3) .story-three-p-label,
+.story-about-container.is-visible .story-three-p-item:nth-child(3) .story-three-p-title {
+  transition-delay: 0.40s;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .story-three-p-item,
+  .story-three-p-item .story-three-p-label,
+  .story-three-p-item .story-three-p-title {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* ==================================================
@@ -678,25 +754,276 @@
   position: relative;
   width: 100%;
   max-width: 950px;
+  aspect-ratio: 1534 / 964;
+  overflow: hidden;
+  border-radius: 0;
+  background-color: #e3eff3;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.story-flywheel-img-hero {
-  width: 100%;
-  height: auto;
+.story-flywheel-img-hero,
+.story-flywheel-img-outer {
+  position: absolute;
+  z-index: 2;
+  width: 125.16%;
+  height: 112.03%;
+  left: -17.34%;
+  top: -11.62%;
+  max-width: none;
+  max-height: none;
+  object-fit: fill;
+  background-color: #e3eff3;
   display: block;
   user-select: none;
   -webkit-user-drag: none;
-  filter: drop-shadow(0 18px 45px rgba(11, 31, 58, 0.08));
-  transition: transform 0.5s ease;
+  pointer-events: none;
 }
 
+/* ==================================================
+   CARD SYNCHRONIZED GLOW OVERLAYS (STATIONARY)
+   Top: Learning & Development (Red)
+   Left: Staffing (Orange)
+   Right: Products HR & L&D (Teal)
+================================================== */
+.story-card-glow-overlay {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 22px;
+  opacity: 0;
+  z-index: 3;
+}
+
+.story-card-glow-top {
+  left: 35.75%;
+  top: 0.85%;
+  width: 29.00%;
+  height: 20.91%;
+  animation: mcTopCardGlow 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.story-card-glow-left {
+  left: 0.81%;
+  top: 48.59%;
+  width: 29.00%;
+  height: 20.91%;
+  animation: mcLeftCardGlow 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.story-card-glow-right {
+  left: 70.20%;
+  top: 48.59%;
+  width: 28.97%;
+  height: 20.91%;
+  animation: mcRightCardGlow 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes mcTopCardGlow {
+  0%, 14.3% {
+    opacity: 0;
+    box-shadow: none;
+    border: 1px solid transparent;
+  }
+  21.4% {
+    opacity: 1;
+    box-shadow: 0 0 28px rgba(226, 72, 64, 0.40), inset 0 0 14px rgba(226, 72, 64, 0.20);
+    border: 1px solid rgba(226, 72, 64, 0.50);
+  }
+  28.6%, 100% {
+    opacity: 0;
+    box-shadow: none;
+    border: 1px solid transparent;
+  }
+}
+
+@keyframes mcLeftCardGlow {
+  0%, 28.6% {
+    opacity: 0;
+    box-shadow: none;
+    border: 1px solid transparent;
+  }
+  35.7% {
+    opacity: 1;
+    box-shadow: 0 0 28px rgba(254, 180, 66, 0.40), inset 0 0 14px rgba(254, 180, 66, 0.20);
+    border: 1px solid rgba(254, 180, 66, 0.50);
+  }
+  42.9%, 100% {
+    opacity: 0;
+    box-shadow: none;
+    border: 1px solid transparent;
+  }
+}
+
+@keyframes mcRightCardGlow {
+  0%, 42.9% {
+    opacity: 0;
+    box-shadow: none;
+    border: 1px solid transparent;
+  }
+  50.0% {
+    opacity: 1;
+    box-shadow: 0 0 28px rgba(18, 137, 153, 0.40), inset 0 0 14px rgba(18, 137, 153, 0.20);
+    border: 1px solid rgba(18, 137, 153, 0.50);
+  }
+  57.1%, 100% {
+    opacity: 0;
+    box-shadow: none;
+    border: 1px solid transparent;
+  }
+}
+
+/* ==================================================
+   CENTRAL THREE-COLOR FLYWHEEL (7-SECOND CHOREOGRAPHY)
+   0–1s: Idle
+   1–2s: Learning Activation (Red emphasis)
+   2–3s: Staffing Activation (Orange emphasis)
+   3–4s: Products Activation (Teal emphasis)
+   4–6s: Full Flywheel clockwise rotation
+   6–7s: Seamless settle and reset to 360deg = 0deg
+================================================== */
+.story-flywheel-center-rotator {
+  position: absolute;
+  top: 56.82%;
+  left: 50.12%;
+  width: 40.39%;
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.story-flywheel-center-segments {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: mcFlywheelChoreography 7s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+  will-change: transform, filter;
+}
+
+@keyframes mcFlywheelChoreography {
+  /* Scene 1 — Idle (0–1s): completely still at 0deg */
+  0%, 14.3% {
+    transform: rotate(0deg);
+    filter: brightness(1) saturate(1) drop-shadow(0 0 10px rgba(2, 132, 199, 0.08));
+  }
+  /* Scene 2 — Learning Activation (1–2s): Red segment emphasized */
+  21.4% {
+    transform: rotate(0deg);
+    filter: brightness(1.08) saturate(1.06) drop-shadow(0 -10px 22px rgba(226, 72, 64, 0.42));
+  }
+  28.6% {
+    transform: rotate(0deg);
+    filter: brightness(1) saturate(1) drop-shadow(0 0 10px rgba(2, 132, 199, 0.08));
+  }
+  /* Scene 3 — Staffing Activation (2–3s): Orange segment emphasized */
+  35.7% {
+    transform: rotate(0deg);
+    filter: brightness(1.08) saturate(1.06) drop-shadow(-10px 6px 22px rgba(254, 180, 66, 0.42));
+  }
+  42.9% {
+    transform: rotate(0deg);
+    filter: brightness(1) saturate(1) drop-shadow(0 0 10px rgba(2, 132, 199, 0.08));
+  }
+  /* Scene 4 — Products Activation (3–4s): Teal segment emphasized */
+  50.0% {
+    transform: rotate(0deg);
+    filter: brightness(1.08) saturate(1.06) drop-shadow(10px 6px 22px rgba(18, 137, 153, 0.42));
+  }
+  57.1% {
+    transform: rotate(0deg);
+    filter: brightness(1.03) saturate(1.02) drop-shadow(0 0 16px rgba(2, 132, 199, 0.20));
+  }
+  /* Scene 5 — Full Flywheel (4–6s): Smooth continuous clockwise rotation */
+  64.3% {
+    transform: rotate(45deg);
+    filter: brightness(1.04) drop-shadow(0 0 16px rgba(2, 132, 199, 0.22));
+  }
+  71.4% {
+    transform: rotate(145deg);
+    filter: brightness(1.04) drop-shadow(0 0 16px rgba(2, 132, 199, 0.22));
+  }
+  78.6% {
+    transform: rotate(250deg);
+    filter: brightness(1.04) drop-shadow(0 0 16px rgba(2, 132, 199, 0.22));
+  }
+  85.7% {
+    transform: rotate(320deg);
+    filter: brightness(1.02) drop-shadow(0 0 12px rgba(2, 132, 199, 0.16));
+  }
+  /* Scene 6 — Seamless Reset (6–7s): settle gently to 360deg (= 0deg) */
+  95.0% {
+    transform: rotate(358deg);
+    filter: brightness(1.01) drop-shadow(0 0 10px rgba(2, 132, 199, 0.10));
+  }
+  100% {
+    transform: rotate(360deg);
+    filter: brightness(1) saturate(1) drop-shadow(0 0 10px rgba(2, 132, 199, 0.08));
+  }
+}
+
+/* ==================================================
+   SUBTLE TRAVELING CIRCULAR HIGHLIGHT GLOW
+================================================== */
+.story-flywheel-subtle-glow {
+  position: absolute;
+  top: 56.82%;
+  left: 50.12%;
+  width: 41%;
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(2, 132, 199, 0.12) 60deg,
+    transparent 120deg,
+    transparent 360deg
+  );
+  filter: blur(5px);
+  animation: mcTravelingHighlight 7s linear infinite;
+}
+
+@keyframes mcTravelingHighlight {
+  0%, 14.3% {
+    opacity: 0.25;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  28.6% {
+    opacity: 0.45;
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  42.9% {
+    opacity: 0.50;
+    transform: translate(-50%, -50%) rotate(210deg);
+  }
+  57.1% {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) rotate(330deg);
+  }
+  85.7% {
+    opacity: 0.45;
+    transform: translate(-50%, -50%) rotate(600deg);
+  }
+  100% {
+    opacity: 0.25;
+    transform: translate(-50%, -50%) rotate(720deg);
+  }
+}
+
+/* ==================================================
+   CENTER MENTORCREW LOGO (PERFECTLY UPRIGHT & STABLE)
+   Scene 1: extremely subtle pulse at 0–1s
+================================================== */
 .story-flywheel-center-logo {
   position: absolute;
-  top: 57.2%;
-  left: 49.9%;
+  top: 56.82%;
+  left: 50.12%;
   transform: translate(-50%, -50%);
   width: 5.8%;
   aspect-ratio: 1 / 1;
@@ -704,11 +1031,61 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  z-index: 4;
+  animation: mcCenterLogoPulse 7s ease-in-out infinite;
+}
+
+@keyframes mcCenterLogoPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 2px 6px rgba(11, 31, 58, 0.12));
+  }
+  7.1% {
+    transform: translate(-50%, -50%) scale(1.045);
+    filter: drop-shadow(0 0 12px rgba(2, 132, 199, 0.35));
+  }
+  14.3%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 2px 6px rgba(11, 31, 58, 0.12));
+  }
 }
 
 .story-flywheel-center-m-icon {
   width: 82%;
   height: 82%;
+  object-fit: contain;
+}
+
+/* ==================================================
+   BOTTOM TRANSITION ARROW (POINTING TO NEXT SECTION)
+================================================== */
+.story-arrow-transition-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: clamp(2rem, 3.5vw, 3rem);
+  padding-bottom: clamp(0.5rem, 1.5vw, 1.5rem);
+  padding-left: clamp(1rem, 3vw, 3rem);
+  padding-right: clamp(1rem, 3vw, 3rem);
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.story-arrow-transition-float {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 820px;
+}
+
+.story-transition-arrow-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
   object-fit: contain;
 }
 
@@ -919,20 +1296,108 @@
   background: rgba(148, 163, 184, 0.35);
 }
 
-/* 3-Column Story Composition: Mission (Left) | Central Learning Orb | Vision (Right) */
-/* 3-Column Story Composition: Mission (Left) | Central Dart Video | Vision (Right) */
+/* Mission & Vision Section: Large Video Left (~54%), Editorial Right (~46%) */
 .story-main-trio-container {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: clamp(20px, 2.5vw, 36px);
-  align-items: stretch;
-  max-width: 1280px;
-  margin: 0 auto;
-  margin-top: clamp(44px, 5vw, 60px) !important;
+  grid-template-columns: minmax(0, 54%) minmax(0, 46%);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+
   width: 100%;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+
+  /* Remove the large artificial gap above Mission/Vision */
+  margin-top: 0 !important;
+
+  padding-left: clamp(1.5rem, 5vw, 5.5rem);
+  padding-right: clamp(1.5rem, 5vw, 5.5rem);
   box-sizing: border-box;
+
   position: relative;
   z-index: 2;
+}
+/* Left Side: Large Cinematic Video */
+.story-mv-video-col {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.story-mv-video-card {
+  position: relative;
+  width: 82%;
+max-width: 760px;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 20px 50px rgba(11, 31, 58, 0.16),
+              0 2px 10px rgba(11, 31, 58, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.story-mv-video-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 60px rgba(11, 31, 58, 0.22),
+              0 4px 14px rgba(11, 31, 58, 0.1);
+}
+
+.story-mv-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Right Side: Editorial Mission + Vision Content */
+.story-mv-content-col {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.25rem, 3.5vw, 3.25rem);
+  width: 100%;
+}
+
+.story-editorial-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.story-editorial-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.story-editorial-title {
+  font-size: clamp(1.4rem, 1.9vw, 1.85rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #0b1f3a;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.story-editorial-divider {
+  height: 2px;
+  width: 100%;
+  max-width: 140px;
+  background: linear-gradient(90deg, #0284c7 0%, rgba(2, 132, 199, 0.2) 80%, transparent 100%);
+  margin: 0.75rem 0 1rem;
+  border-radius: 2px;
+}
+
+.story-editorial-desc {
+  font-size: clamp(0.96rem, 1.05vw, 1.05rem);
+  line-height: 1.72;
+  color: #334155;
+  margin: 0;
+  font-weight: 450;
 }
 
 /* ==================================================
@@ -1888,9 +2353,15 @@
 
   .story-main-trio-container {
     margin-top: 44px !important;
-    gap: 1.25rem;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: stretch;
+    gap: 2.25rem;
+    grid-template-columns: 1fr;
+    padding-left: clamp(1.25rem, 4vw, 2.5rem);
+    padding-right: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  .story-mv-video-col {
+    max-width: 720px;
+    margin: 0 auto;
   }
 
   .story-act-card {
@@ -2046,7 +2517,7 @@
 
   .mentorcrew-story-section {
     margin-top: 0;
-    padding: 3rem 0 clamp(64px, 7vw, 80px);
+    padding: clamp(5.5rem, 8vw, 6.5rem) 0 clamp(64px, 7vw, 80px);
     overflow: clip;
   }
 
@@ -2055,6 +2526,7 @@
     padding-left: 1.25rem;
     padding-right: 1.25rem;
     margin-bottom: 0;
+    scroll-margin-top: 90px;
   }
 
   .story-about-container,
@@ -2087,6 +2559,15 @@
 
   .story-flywheel-graphic-container {
     max-width: 100%;
+  }
+
+  .story-arrow-transition-wrap {
+    margin-top: 1.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .story-transition-arrow-img {
+    width: 100%;
   }
 
   .story-ecosystem-grid {
@@ -2134,9 +2615,20 @@
   .story-main-trio-container {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
     width: 100%;
-    margin-top: 36px !important;
+    margin-top: 32px !important;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .story-mv-video-col {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .story-mv-content-col {
+    gap: 1.75rem;
   }
 
   .story-act-card {
@@ -2244,6 +2736,11 @@
   .story-orb-badge,
   .story-nav-pill,
   .story-nav-dot,
+  .story-flywheel-center-segments,
+  .story-flywheel-center-logo,
+  .story-card-glow-overlay,
+  .story-flywheel-subtle-glow,
+  .story-arrow-transition-float,
   .love-reveal-title,
   .love-reveal-carousel,
   .video-carousel-track,

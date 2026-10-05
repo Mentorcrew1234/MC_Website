@@ -784,7 +784,7 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
   const orbRef = useRef(null);
   const visionRef = useRef(null);
 
-  const [aboutVisible, setAboutVisible] = useState(true);
+  const [aboutVisible, setAboutVisible] = useState(false);
   const [missionVisible, setMissionVisible] = useState(true);
   const [orbVisible, setOrbVisible] = useState(true);
   const [visionVisible, setVisionVisible] = useState(true);
@@ -1046,15 +1046,6 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
     <p className="hero-tagline">
       "Striving to create an ecosystem of limitless possibilities"
     </p>
-
-    {/* Description */}
-    <p className="hero-description">
-      We are here to cater the talent development need's of the
-      generations to come in. By complementing the mainstream
-      education and thereby upskill human capital to aid the
-      inclusive growth of any society.
-    </p>
-
     {/* CTA */}
     <a
       href="#about-mentorcrew"
@@ -1082,7 +1073,7 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
         {/* ABOUT MENTORCREW OPEN SECTION (FULL WIDTH, 2-COLUMN: STORY ON LEFT + LARGE FLYWHEEL ON RIGHT) */}
         <div className="section-container story-about-wrapper" id="about-mentorcrew">
           <div
-            className="story-about-container story-reveal-about is-visible"
+            className={`story-about-container story-reveal-about ${aboutVisible ? 'is-visible' : ''}`}
             ref={aboutRef}
           >
             <div className="story-about-split-layout">
@@ -1097,31 +1088,42 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
                 <p className="story-about-text">
                   MentorCrew envisions what India envisions for its current and future workforce - Addressing the Employability Gap and building a qualified and sustainable workforce to meet global demands. MentorCrew endeavors to contribute to this collective vision with its refreshing ideas, proven and improved pedagogical practices and championing innovative and practical approaches to skill development. We at MentorCrew strongly believe that scalability and agility in our solutions can receive a positive stimulus effect by building and leveraging IT tools and digital platforms.
                 </p>
+                 {/* Visual transition arrow pointing to the next section */}
+            <div className="story-arrow-transition-wrap">
+              <div className="story-arrow-transition-float">
+                <img
+                  src="/arrow.png"
+                  alt="Visual transition to next section"
+                  className="story-transition-arrow-img"
+                  loading="lazy"
+                />
+              </div>
+            </div>
 
                 {/* People / Purpose / Progress Row */}
-                <div className="story-three-p-row">
+                <div className={`story-three-p-row ${aboutVisible ? 'is-visible' : ''}`}>
                   <div className="story-three-p-item">
-                    <span className="story-three-p-label">PEOPLE</span>
+                    <span className="story-three-p-label"></span>
                     <span className="story-three-p-title">
-                      Empowering
+                      
                       <br />
-                      Talent
+                    
                     </span>
                   </div>
                   <div className="story-three-p-item">
-                    <span className="story-three-p-label">PURPOSE</span>
+                    <span className="story-three-p-label"></span>
                     <span className="story-three-p-title">
-                      Driving
+                      
                       <br />
-                      Opportunities
+                      
                     </span>
                   </div>
                   <div className="story-three-p-item">
-                    <span className="story-three-p-label">PROGRESS</span>
+                    <span className="story-three-p-label"></span>
                     <span className="story-three-p-title">
-                      Creating
+                   
                       <br />
-                      Impact
+                     
                     </span>
                   </div>
                 </div>
@@ -1131,327 +1133,86 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
               <div className="story-about-visual-col">
                 <div className="story-flywheel-hero-wrap">
                   <div className="story-flywheel-graphic-container">
-                    <img
-                      src="/wheel.png"
-                      alt="MentorCrew Ecosystem Flywheel - Learning & Development, Staffing, Products HR & L&D"
+                    <video
+                      src="/perfect_flywheel.mp4"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
                       className="story-flywheel-img-hero"
-                      loading="lazy"
+                      aria-label="MentorCrew Ecosystem Flywheel - Learning & Development, Staffing, Products HR & L&D"
                     />
-                    <div className="story-flywheel-center-logo">
-                      <img
-                        src="/m_logo.png"
-                        alt="MentorCrew Logo"
-                        className="story-flywheel-center-m-icon"
-                      />
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Preserved underlying video & arrow assets in codebase */}
+           
+
+            {/* Preserved underlying video, base wheel, and arrow assets in codebase */}
             <div className="story-arrow-preserved-asset" style={{ display: 'none' }} aria-hidden="true">
-              <video src="/wheel video.mp4" muted playsInline />
+              <video src="/perfect_flywheel.mp4" muted playsInline />
+              <img src="/wheel.png" alt="Flywheel Reference" />
               <img src="/arrow.png" alt="Growth Arrow" />
             </div>
           </div>
         </div>
 
-        {/* 3-COLUMN COMPOSITION: 01 MISSION | CENTRAL LEARNING ORB | 02 VISION */}
+        {/* MISSION & VISION SECTION: LARGE CINEMATIC VIDEO (LEFT) + EDITORIAL MISSION & VISION (RIGHT) */}
         <div className="section-container story-main-trio-container">
-          {/* LEFT: 01 MISSION */}
+          {/* LEFT: LARGE CINEMATIC VIDEO (~54%) */}
           <div
-            className="story-act-card story-act-mission story-reveal-mission is-visible"
-            ref={missionRef}
-          >
-            <div className="story-act-header">
-              <span className="story-act-num">01</span>
-              <div className="story-act-icon-wrap">
-                <Flame size={24} />
-              </div>
-            </div>
-            <h3 className="story-act-title">MISSION</h3>
-            <p className="story-act-desc">
-              A dynamic, vibrant, value-based organization that is committed to deliver learning and counsel of the highest excellence to prepare students and professionals for career readiness and successfully leverage entrepreneurial avenues/opportunities. MentorCrew is astute in spotting lacunae and opportunity in addressing the skill gaps and promoting continuous learning & development for workforce and businesses alike, now and for the future.
-            </p>
-          </div>
-
-          {/* CENTER: CENTRAL VISUAL ANCHOR (EXISTING DART VIDEO: /mission.mp4) */}
-          <div
-            className="story-central-visual-wrap story-reveal-orb is-visible"
+            className="story-mv-video-col story-reveal-orb is-visible"
             ref={orbRef}
           >
-            <div className="story-dart-card">
+            <div className="story-mv-video-card">
               <video
                 src="/mission.mp4"
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="story-dart-video"
+                className="story-mv-video"
+                aria-label="MentorCrew Mission Video"
               />
             </div>
-
-            {/* PREVIOUS SVG BOOK + PLANT VISUAL PRESERVED INTACT (DISABLED) */}
-            {false && (
-              <>
-                <div className="story-central-orb">
-                  <div className="story-orb-glow" />
-
-                  {/* Stable Circular Orbit with Travelling Light Particles */}
-                  <div className="story-orbit-container">
-                    <svg className="story-orbit-svg" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      {/* Stable circular orbit track */}
-                      <circle cx="120" cy="120" r="108" className="story-orbit-track" />
-                      
-                      {/* Rotating particle group along the orbit */}
-                      <g className="story-orbit-particle-group">
-                        <circle cx="120" cy="12" r="3.5" className="story-orbit-particle primary" />
-                        <circle cx="120" cy="12" r="7" className="story-orbit-particle-glow" />
-                        <circle cx="228" cy="120" r="2.2" className="story-orbit-particle secondary" />
-                        <circle cx="12" cy="120" r="2.2" className="story-orbit-particle secondary" />
-                      </g>
-                    </svg>
-                  </div>
-
-                  {/* Core Learning-Growth Scene: Glass Orb, Book, Rising Energy & Growing Plant */}
-                  <div className="story-growth-scene">
-                    <svg className="story-growth-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <defs>
-                        {/* Glass orb backdrop gradient */}
-                        <radialGradient id="orbGlassGrad" cx="38%" cy="32%" r="65%">
-                          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
-                          <stop offset="45%" stopColor="#e0f2fe" stopOpacity="0.70" />
-                          <stop offset="75%" stopColor="#bae6fd" stopOpacity="0.40" />
-                          <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.20" />
-                        </radialGradient>
-
-                        {/* Stem gradient */}
-                        <linearGradient id="stemGradient" x1="100" y1="160" x2="100" y2="76" gradientUnits="userSpaceOnUse">
-                          <stop offset="0%" stopColor="#059669" />
-                          <stop offset="50%" stopColor="#10b981" />
-                          <stop offset="100%" stopColor="#34d399" />
-                        </linearGradient>
-
-                        {/* Leaf gradients */}
-                        <linearGradient id="leafGradLeft" x1="0%" y1="100%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#047857" />
-                          <stop offset="60%" stopColor="#10b981" />
-                          <stop offset="100%" stopColor="#6ee7b7" />
-                        </linearGradient>
-
-                        <linearGradient id="leafGradRight" x1="100%" y1="100%" x2="0%" y2="0%">
-                          <stop offset="0%" stopColor="#047857" />
-                          <stop offset="60%" stopColor="#10b981" />
-                          <stop offset="100%" stopColor="#6ee7b7" />
-                        </linearGradient>
-
-                        {/* Energy beam gradient */}
-                        <radialGradient id="energyBeamGrad" cx="50%" cy="50%" r="50%">
-                          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.45" />
-                          <stop offset="50%" stopColor="#0284c7" stopOpacity="0.15" />
-                          <stop offset="100%" stopColor="#0284c7" stopOpacity="0" />
-                        </radialGradient>
-
-                        {/* Canopy bloom aura */}
-                        <radialGradient id="canopyAuraGrad" cx="50%" cy="50%" r="50%">
-                          <stop offset="0%" stopColor="#34d399" stopOpacity="0.40" />
-                          <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.20" />
-                          <stop offset="100%" stopColor="#0284c7" stopOpacity="0" />
-                        </radialGradient>
-
-                        {/* Book page gradients */}
-                        <linearGradient id="bookPageL" x1="100%" y1="0%" x2="0%" y2="0%">
-                          <stop offset="0%" stopColor="#cbd5e1" />
-                          <stop offset="25%" stopColor="#f8fafc" />
-                          <stop offset="100%" stopColor="#ffffff" />
-                        </linearGradient>
-                        <linearGradient id="bookPageR" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#cbd5e1" />
-                          <stop offset="25%" stopColor="#f8fafc" />
-                          <stop offset="100%" stopColor="#ffffff" />
-                        </linearGradient>
-
-                        {/* Particle filter */}
-                        <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-                          <feGaussianBlur stdDeviation="2.5" result="blur" />
-                          <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                        </filter>
-                      </defs>
-
-                      {/* Inner Glass Orb Base */}
-                      <circle cx="100" cy="100" r="86" fill="url(#orbGlassGrad)" className="story-glass-orb-body" />
-                      <circle cx="100" cy="100" r="86" stroke="rgba(255, 255, 255, 0.9)" strokeWidth="1.5" />
-
-                      {/* Dynamic Glowing Energy Beam rising from book */}
-                      <ellipse cx="100" cy="115" rx="18" ry="42" fill="url(#energyBeamGrad)" className="story-energy-beam" />
-                      
-                      {/* Canopy Glow behind mature foliage */}
-                      <circle cx="100" cy="84" r="32" fill="url(#canopyAuraGrad)" className="story-canopy-aura" />
-
-                      {/* GROWING PLANT (EMERGES ORGANICALLY FROM BOOK SEAM AT X:100, Y:156) */}
-                      <g className="story-plant-assembly">
-                        {/* Natural Living Plant Assembly with subtle living sway */}
-                        <g className="plant-living-sway">
-                          {/* 1. Main Stem: organic curved path drawing upward from book seam */}
-                          <path
-                            id="plant-stem"
-                            className="plant-part plant-stem"
-                            d="M 100 156 C 97 142, 98 120, 101.5 106 C 103 94, 100.5 74, 100 62"
-                            pathLength="100"
-                            stroke="url(#stemGradient)"
-                            strokeWidth="3.2"
-                            strokeLinecap="round"
-                            fill="none"
-                          />
-
-                          {/* 2. Seedling Sprout at Book Seam (Phase 1: 0.0s - 1.4s) */}
-                          <g id="plant-sprout" className="plant-part plant-sprout">
-                            <ellipse cx="100" cy="155" rx="3.5" ry="2" fill="#34d399" />
-                            <path d="M 100 155 C 97 152 95 148 97 146 C 99 146 100 150 100 155 Z" fill="url(#leafGradLeft)" />
-                            <path d="M 100 155 C 103 152 105 148 103 146 C 101 146 100 150 100 155 Z" fill="url(#leafGradRight)" />
-                          </g>
-
-                          {/* 3. Lower-Left Leaf (Phase 3: 2.0s - 3.0s | Attachment: 98.5px, 132px) */}
-                          <g id="leaf-lower-left" className="plant-part leaf-lower-left">
-                            <path
-                              d="M 98.5 132 C 88 125, 74 128, 68 138 C 76 144, 91 141, 98.5 132 Z"
-                              fill="url(#leafGradLeft)"
-                            />
-                            <path d="M 98.5 132 C 88 133, 79 136, 70 138" stroke="rgba(255, 255, 255, 0.45)" strokeWidth="0.75" strokeLinecap="round" />
-                          </g>
-
-                          {/* 4. Lower-Right Leaf (Phase 3: 2.0s - 3.0s | Attachment: 99px, 130px) */}
-                          <g id="leaf-lower-right" className="plant-part leaf-lower-right">
-                            <path
-                              d="M 99 130 C 109 123, 123 126, 129 136 C 122 142, 107 139, 99 130 Z"
-                              fill="url(#leafGradRight)"
-                            />
-                            <path d="M 99 130 C 109 131, 118 134, 127 136" stroke="rgba(255, 255, 255, 0.45)" strokeWidth="0.75" strokeLinecap="round" />
-                          </g>
-
-                          {/* 5. Middle-Left Leaf (Phase 4: 2.8s - 4.0s | Attachment: 101.5px, 106px) */}
-                          <g id="leaf-middle-left" className="plant-part leaf-middle-left">
-                            <path
-                              d="M 101.5 106 C 89 97, 72 100, 64 111 C 73 118, 91 115, 101.5 106 Z"
-                              fill="url(#leafGradLeft)"
-                            />
-                            <path d="M 101.5 106 C 89 108, 78 111, 66 111" stroke="rgba(255, 255, 255, 0.5)" strokeWidth="0.8" strokeLinecap="round" />
-                          </g>
-
-                          {/* 6. Middle-Right Leaf (Phase 4: 2.8s - 4.0s | Attachment: 101.5px, 104px) */}
-                          <g id="leaf-middle-right" className="plant-part leaf-middle-right">
-                            <path
-                              d="M 101.5 104 C 114 95, 131 98, 139 109 C 130 116, 112 113, 101.5 104 Z"
-                              fill="url(#leafGradRight)"
-                            />
-                            <path d="M 101.5 104 C 114 106, 125 109, 137 109" stroke="rgba(255, 255, 255, 0.5)" strokeWidth="0.8" strokeLinecap="round" />
-                          </g>
-
-                          {/* 7. Upper-Left Leaf (Phase 5: 3.8s - 5.0s | Attachment: 99.5px, 82px) */}
-                          <g id="leaf-upper-left" className="plant-part leaf-upper-left">
-                            <path
-                              d="M 99.5 82 C 89 73, 76 76, 70 85 C 77 91, 91 89, 99.5 82 Z"
-                              fill="url(#leafGradLeft)"
-                            />
-                            <path d="M 99.5 82 C 89 83, 80 85, 72 85" stroke="rgba(255, 255, 255, 0.5)" strokeWidth="0.75" strokeLinecap="round" />
-                          </g>
-
-                          {/* 8. Upper-Right Leaf (Phase 5: 3.8s - 5.0s | Attachment: 99.5px, 80px) */}
-                          <g id="leaf-upper-right" className="plant-part leaf-upper-right">
-                            <path
-                              d="M 99.5 80 C 110 71, 123 74, 129 83 C 121 89, 108 87, 99.5 80 Z"
-                              fill="url(#leafGradRight)"
-                            />
-                            <path d="M 99.5 80 C 110 81, 119 83, 127 83" stroke="rgba(255, 255, 255, 0.5)" strokeWidth="0.75" strokeLinecap="round" />
-                          </g>
-
-                          {/* 9. Top Leaf (Phase 6: 4.8s - 5.8s | Attachment: 100px, 62px) */}
-                          <g id="leaf-top" className="plant-part leaf-top">
-                            <path
-                              d="M 100 62 C 93 51, 94 40, 100 34 C 106 40, 107 51, 100 62 Z"
-                              fill="url(#leafGradLeft)"
-                            />
-                            <line x1="100" y1="62" x2="100" y2="38" stroke="rgba(255, 255, 255, 0.6)" strokeWidth="0.85" strokeLinecap="round" />
-                            <circle cx="100" cy="35" r="1.8" fill="#d1fae5" />
-                          </g>
-                        </g>
-                      </g>
-
-                      {/* OPEN BOOK AT THE BOTTOM (REMAINS STATIONARY & FOUNDATIONAL) */}
-                      <g className="story-open-book">
-                        {/* Book base / hardcover shadow */}
-                        <path
-                          d="M 62 168 Q 100 176 138 168 L 135 174 Q 100 181 65 174 Z"
-                          fill="#0f294a"
-                          opacity="0.85"
-                        />
-                        
-                        {/* Left page block */}
-                        <path
-                          d="M 100 158 C 86 152 74 154 64 159 L 64 167 C 74 162 86 160 100 166 Z"
-                          fill="url(#bookPageL)"
-                          stroke="#94a3b8"
-                          strokeWidth="0.75"
-                        />
-                        {/* Right page block */}
-                        <path
-                          d="M 100 158 C 114 152 126 154 136 159 L 136 167 C 126 162 114 160 100 166 Z"
-                          fill="url(#bookPageR)"
-                          stroke="#94a3b8"
-                          strokeWidth="0.75"
-                        />
-
-                        {/* Subtle page texture lines */}
-                        <path d="M 70 161 C 78 158 88 158 95 161" stroke="rgba(100, 116, 139, 0.45)" strokeWidth="0.75" />
-                        <path d="M 70 164 C 78 161 88 161 95 164" stroke="rgba(100, 116, 139, 0.35)" strokeWidth="0.75" />
-                        <path d="M 105 161 C 112 158 122 158 130 161" stroke="rgba(100, 116, 139, 0.45)" strokeWidth="0.75" />
-                        <path d="M 105 164 C 112 161 122 161 130 164" stroke="rgba(100, 116, 139, 0.35)" strokeWidth="0.75" />
-
-                        {/* Center Spine & Binding Seam */}
-                        <line x1="100" y1="158" x2="100" y2="167" stroke="#0284c7" strokeWidth="1.6" strokeLinecap="round" />
-
-                        {/* Gentle light source at the book seam */}
-                        <ellipse cx="100" cy="158" rx="8" ry="3.5" fill="#38bdf8" opacity="0.65" filter="url(#softGlow)" />
-                      </g>
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Labels in reference positions: LEARN (top), EMPOWER (bottom-left), GROW (bottom-right) */}
-                <div className="story-orb-labels-wrap">
-                  <span className="story-orb-badge badge-learn">
-                    <span className="story-orb-badge-dot dot-learn" />
-                    LEARN
-                  </span>
-                  <span className="story-orb-badge badge-empower">
-                    <span className="story-orb-badge-dot dot-empower" />
-                    EMPOWER
-                  </span>
-                  <span className="story-orb-badge badge-grow">
-                    <span className="story-orb-badge-dot dot-grow" />
-                    GROW
-                  </span>
-                </div>
-              </>
-            )}
           </div>
 
-          {/* RIGHT: 02 VISION */}
-          <div
-            className="story-act-card story-act-vision story-reveal-vision is-visible"
-            ref={visionRef}
-          >
-            <div className="story-act-header">
-              <span className="story-act-num">02</span>
-              <div className="story-act-icon-wrap">
-                <Eye size={24} />
+          {/* RIGHT: EDITORIAL MISSION + VISION CONTENT (~46%) */}
+          <div className="story-mv-content-col">
+            {/* MISSION */}
+            <div
+              className="story-editorial-block story-reveal-mission is-visible"
+              ref={missionRef}
+            >
+              <div className="story-editorial-header">
+                <div className="story-act-icon-wrap">
+                  <Flame size={20} />
+                </div>
+                <h3 className="story-editorial-title">MISSION</h3>
               </div>
+              <div className="story-editorial-divider" />
+              <p className="story-editorial-desc">
+                A dynamic, vibrant, value-based organization that is committed to deliver learning and counsel of the highest excellence to prepare students and professionals for career readiness and successfully leverage entrepreneurial avenues/opportunities. MentorCrew is astute in spotting lacunae and opportunity in addressing the skill gaps and promoting continuous learning & development for workforce and businesses alike, now and for the future.
+              </p>
             </div>
-            <h3 className="story-act-title">VISION</h3>
-            <p className="story-act-desc">
-              Educate, Empower and Inspire to build a truly transformational, self-sufficient and valuable Human capital and thereby achieve holistic and equitable socio-economic development.
-            </p>
+
+            {/* VISION */}
+            <div
+              className="story-editorial-block story-reveal-vision is-visible"
+              ref={visionRef}
+            >
+              <div className="story-editorial-header">
+                <div className="story-act-icon-wrap">
+                  <Eye size={20} />
+                </div>
+                <h3 className="story-editorial-title">VISION</h3>
+              </div>
+              <div className="story-editorial-divider" />
+              <p className="story-editorial-desc">
+                Educate, Empower and Inspire to build a truly transformational, self-sufficient and valuable Human capital and thereby achieve holistic and equitable socio-economic development.
+              </p>
+            </div>
           </div>
         </div>
       </section>
