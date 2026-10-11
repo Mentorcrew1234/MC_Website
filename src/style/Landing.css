@@ -490,13 +490,13 @@
   position: relative;
   margin-top: 0;
   z-index: 20;
-  padding: clamp(2rem, 3vw, 3rem) 0 clamp(60px, 5vw, 80px);
+  padding: clamp(2rem, 3vw, 3rem) 0 clamp(2rem, 3vw, 2.5rem);
   background:
     radial-gradient(ellipse 65% 45% at 20% 15%, rgba(56, 189, 248, 0.09) 0%, transparent 60%),
     radial-gradient(ellipse 60% 45% at 85% 75%, rgba(47, 224, 198, 0.08) 0%, transparent 60%),
     radial-gradient(circle 800px at 50% 25%, rgba(255, 255, 255, 0.65) 0%, transparent 75%),
     linear-gradient(180deg, #f0f7fd 0%, #e3f2fd 50%, #f1f6fb 100%);
-  overflow: visible;
+  overflow-x: clip;
 }
 
 .story-section-bg-glow {
@@ -523,10 +523,10 @@
   padding-left: clamp(1.5rem, 5vw, 5.5rem);
   padding-right: clamp(1.5rem, 5vw, 5.5rem);
 
-padding-top: 0;
+  padding-top: 0;
 
   /* Small controlled spacing before Mission/Vision */
-  padding-bottom: clamp(1.5rem, 2vw, 2.5rem);
+  padding-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
 
   margin-bottom: 0 !important;
 
@@ -558,7 +558,7 @@ padding-top: 0;
 }
 
 .story-about-header {
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -577,7 +577,7 @@ padding-top: 0;
   font-size: 0.76rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
 }
 
 .story-main-heading {
@@ -601,23 +601,17 @@ padding-top: 0;
 .story-about-text {
   font-size: clamp(1rem, 1.1vw, 1.06rem);
   color: #334155;
-  line-height: 1.75;
-  margin: 1.25rem 0 0;
+  line-height: 1.68;
+  margin: 0;
   max-width: 600px;
   text-align: left;
 }
 
 /* ==================================================
-   PEOPLE / PURPOSE / PROGRESS ROW & ENTRANCE ANIMATION
+   PEOPLE / PURPOSE / PROGRESS ROW (HIDDEN - PRESERVED)
 ================================================== */
 .story-three-p-row {
-  display: flex;
-  align-items: flex-start;
-  gap: clamp(1.75rem, 3vw, 3rem);
-  margin-top: clamp(2rem, 3vw, 2.75rem);
-  padding-top: clamp(1.25rem, 2vw, 1.75rem);
-  border-top: 1px solid rgba(2, 132, 199, 0.16);
-  width: 100%;
+  display: none !important;
 }
 
 .story-three-p-item {
@@ -719,12 +713,10 @@ padding-top: 0;
 ================================================== */
 .story-about-split-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
-  gap: clamp(2rem, 4vw, 4.5rem);
+  grid-template-columns: minmax(0, 42%) minmax(0, 58%);
+  gap: clamp(1.5rem, 3vw, 3.5rem);
   align-items: center;
   width: 100%;
-  text-align: left;
-  box-sizing: border-box;
 }
 
 .story-about-content-col {
@@ -732,7 +724,8 @@ padding-top: 0;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  max-width: 640px;
+  width: 100%;
+  max-width: 100%;
 }
 
 .story-about-visual-col {
@@ -753,11 +746,9 @@ padding-top: 0;
 .story-flywheel-graphic-container {
   position: relative;
   width: 100%;
-  max-width: 950px;
-  aspect-ratio: 1534 / 964;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 0;
-  background-color: #e3eff3;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -765,16 +756,9 @@ padding-top: 0;
 
 .story-flywheel-img-hero,
 .story-flywheel-img-outer {
-  position: absolute;
-  z-index: 2;
-  width: 125.16%;
-  height: 112.03%;
-  left: -17.34%;
-  top: -11.62%;
-  max-width: none;
-  max-height: none;
-  object-fit: fill;
-  background-color: #e3eff3;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: block;
   user-select: none;
   -webkit-user-drag: none;
@@ -1061,23 +1045,22 @@ padding-top: 0;
 ================================================== */
 .story-arrow-transition-wrap {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
-  margin-top: clamp(2rem, 3.5vw, 3rem);
-  padding-bottom: clamp(0.5rem, 1.5vw, 1.5rem);
-  padding-left: clamp(1rem, 3vw, 3rem);
-  padding-right: clamp(1rem, 3vw, 3rem);
+  margin-top: clamp(0.75rem, 1.25vw, 1.25rem);
+  margin-bottom: 0;
+  padding: 0;
   pointer-events: none;
   box-sizing: border-box;
 }
 
 .story-arrow-transition-float {
   display: inline-flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
-  max-width: 820px;
+  max-width: 540px;
 }
 
 .story-transition-arrow-img {
@@ -1145,7 +1128,7 @@ padding-top: 0;
   height: auto;
   max-height: 260px;
   aspect-ratio: 16 / 9;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
   border-radius: 14px;
   box-shadow: 0 8px 24px rgba(11, 31, 58, 0.12);
@@ -1401,20 +1384,18 @@ max-width: 760px;
 }
 
 /* ==================================================
-   SCROLL-TRIGGERED ENTRANCE ANIMATIONS
-   1. About: translateY(35px) scale(0.98) -> 800ms, 0ms delay
-   2. Mission: translateX(-70px) scale(0.98) -> 800ms, 150ms delay
-   3. Vision: translateX(70px) scale(0.98) -> 800ms, 250ms delay
-   Central Visual remains stable
-================================================== */
+   ENTRANCE SLIDE-IN ANIMATIONS: ABOUT / MISSION & VISION
+   - Viewport-triggered via IntersectionObserver
+   - Smooth cinematic ease-out: cubic-bezier(0.16, 1, 0.3, 1)
+   - Resets and replays upon scrolling out and in
+   ================================================== */
 
-/* 1. About MentorCrew Box */
-.story-about-container.story-reveal-about,
-.story-about-card.story-reveal-about,
-.story-reveal-about {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
+/* Container and base card stability */
+.story-about-container,
+.story-about-card {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
 }
 
 .story-about-container:hover,
@@ -1424,37 +1405,113 @@ max-width: 760px;
   box-shadow: none !important;
 }
 
-/* 2. Mission Box: Fully visible normal content */
-.story-reveal-mission {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
-}
-.story-reveal-mission.is-visible {
-  opacity: 1 !important;
-  transform: none !important;
+/* About Text content wrapper */
+.story-about-text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
 }
 
-/* 3. Central Visual Anchor: Fully visible normal content */
-.story-reveal-orb {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
-}
-.story-reveal-orb.is-visible {
-  opacity: 1 !important;
-  transform: none !important;
+/* 1. About Left Content (Badge, Heading, Description, Arrow Diagram, 3 P's)
+   Slides in from the LEFT: translateX(-70px) -> 0 */
+.story-about-content-col {
+  opacity: 0;
+  transform: translateX(-70px);
+  transition: opacity 1.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 
-/* 4. Vision Box: Fully visible normal content */
-.story-reveal-vision {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
+.story-about-content-col.is-visible,
+.story-about-container.is-visible .story-about-content-col {
+  opacity: 1;
+  transform: translateX(0);
 }
-.story-reveal-vision.is-visible {
-  opacity: 1 !important;
-  transform: none !important;
+
+/* 2. About Right Flywheel Video
+   Slides in from the RIGHT: translateX(100px) -> 0
+   Staggered entrance: starts ~0.20s after left content begins */
+.story-about-visual-col {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: 0.20s;
+  will-change: opacity, transform;
+}
+
+.story-about-visual-col.is-visible,
+.story-about-container.is-visible .story-about-visual-col {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* 3. Mission & Vision Left Video
+   Slides in from the LEFT: translateX(-90px) -> 0 */
+.story-mv-video-col {
+  opacity: 0;
+  transform: translateX(-90px);
+  transition: opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.story-mv-video-col.is-visible,
+.story-main-trio-container.is-visible .story-mv-video-col {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* 4. Mission & Vision Right Content (Mission card + Vision card)
+   Slides in from the RIGHT: translateX(90px) -> 0 */
+.story-mv-content-col {
+  opacity: 0;
+  transform: translateX(90px);
+  transition: opacity 1.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.story-mv-content-col.is-visible,
+.story-main-trio-container.is-visible .story-mv-content-col {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* 5. Transition Arrow Element (if present) */
+.story-mv-arrow,
+.story-transition-arrow-element {
+  opacity: 0;
+  transform: translateX(70px);
+  transition: opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.story-mv-arrow.is-visible,
+.story-transition-arrow-element.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .story-about-content-col,
+  .story-about-text-content,
+  .story-about-visual-col,
+  .story-arrow-transition-wrap,
+  .story-mv-video-col,
+  .story-mv-content-col,
+  .story-editorial-block.story-reveal-mission,
+  .story-editorial-block.story-reveal-vision,
+  .story-mv-arrow,
+  .story-transition-arrow-element {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* Story Content Card: Refined Compact Glass UI — Matches Height Automatically */
@@ -2536,38 +2593,128 @@ max-width: 760px;
     width: 100%;
   }
 
+  /* ==================================================
+     MOBILE TARGET ORDER & ENTRANCE ANIMATIONS (About + Mission/Vision)
+     Order:
+     1. About text (Badge, Heading, Description)
+     2. Flywheel Video
+     3. Good -> To -> Great Arrow
+     4. Dart / Mission Video
+     5. Mission & Vision Editorial Content
+     ================================================== */
   .story-about-split-layout {
-    grid-template-columns: 1fr;
-    gap: 2.25rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    width: 100% !important;
   }
 
   .story-about-content-col {
-    order: 1;
-    max-width: 100%;
+    display: contents !important;
   }
 
+  /* 1. About text (Badge, Heading, Description)
+     Slide from LEFT: -80px -> 0, duration: 1.7s, delay: 0s */
+  .story-about-text-content {
+    order: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    width: 100% !important;
+    margin-bottom: clamp(1.5rem, 3.5vw, 2.25rem) !important;
+    opacity: 0;
+    transform: translateX(-80px);
+    transition: opacity 1.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0s;
+    will-change: opacity, transform;
+  }
+
+  .story-about-text-content.is-visible,
+  .story-about-container.is-visible .story-about-text-content {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* 2. Flywheel Video: Directly below description, 100% width, 16:9, undistorted
+     Slide from RIGHT: 80px -> 0, duration: 1.8s, delay: 0.20s */
   .story-about-visual-col {
-    order: 2;
+    order: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    opacity: 0;
+    transform: translateX(80px);
+    transition: opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.20s;
+    will-change: opacity, transform;
+  }
+
+  .story-about-visual-col.is-visible,
+  .story-about-container.is-visible .story-about-visual-col {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .story-flywheel-hero-wrap {
+    width: 100% !important;
+  }
+
+  .story-flywheel-graphic-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+    margin: 0 auto !important;
+  }
+
+  /* 3. Good -> To -> Great Arrow: Directly below Flywheel with noticeable gap
+     Slide from LEFT: -50px -> 0, duration: 1.6s, delay: 0.35s */
+  .story-arrow-transition-wrap {
+    order: 3 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: clamp(1.75rem, 4vw, 2.5rem) !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.35s;
+    will-change: opacity, transform;
+  }
+
+  .story-arrow-transition-wrap.is-visible,
+  .story-about-container.is-visible .story-arrow-transition-wrap {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .story-arrow-transition-float {
+    justify-content: center !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .story-transition-arrow-img {
+    width: 100% !important;
+    max-width: 480px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    display: block !important;
   }
 
   .story-three-p-row {
+    order: 4 !important;
     gap: 1.5rem;
     flex-wrap: wrap;
     margin-top: 1.75rem;
     padding-top: 1.25rem;
-  }
-
-  .story-flywheel-graphic-container {
-    max-width: 100%;
-  }
-
-  .story-arrow-transition-wrap {
-    margin-top: 1.75rem;
-    padding-bottom: 0.75rem;
-  }
-
-  .story-transition-arrow-img {
-    width: 100%;
   }
 
   .story-ecosystem-grid {
@@ -2612,23 +2759,99 @@ max-width: 760px;
     display: none !important;
   }
 
+  /* MISSION & VISION SECTION:
+     Visual Order on Mobile:
+     Mission -> Dart Video -> Vision
+  */
   .story-main-trio-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    width: 100%;
-    margin-top: 32px !important;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    width: 100% !important;
+    margin-top: clamp(2.5rem, 5vw, 3.5rem) !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    box-sizing: border-box !important;
   }
 
-  .story-mv-video-col {
-    width: 100%;
-    max-width: 100%;
-  }
-
+  /* Expose Mission and Vision directly into the trio flex container */
   .story-mv-content-col {
-    gap: 1.75rem;
+    display: contents !important;
+  }
+
+  /* 4. MISSION CONTENT (Appears FIRST after Arrow)
+     Slide from LEFT: -70px -> 0, duration: 1.7s, delay: 0s */
+  .story-editorial-block.story-reveal-mission {
+    order: 1 !important;
+    width: 100% !important;
+    margin-bottom: clamp(28px, 4vw, 38px) !important;
+    opacity: 0;
+    transform: translateX(-70px);
+    transition: opacity 1.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0s;
+    will-change: opacity, transform;
+  }
+
+  .story-editorial-block.story-reveal-mission.is-visible,
+  .story-main-trio-container.is-visible .story-editorial-block.story-reveal-mission {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* 5. DART VIDEO (Centered BETWEEN Mission and Vision)
+     Slide from LEFT: -70px -> 0, duration: 1.8s, delay: 0.15s */
+  .story-mv-video-col {
+    order: 2 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: clamp(32px, 4.5vw, 42px) !important;
+    opacity: 0;
+    transform: translateX(-70px);
+    transition: opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.15s;
+    will-change: opacity, transform;
+  }
+
+  .story-mv-video-col.is-visible,
+  .story-main-trio-container.is-visible .story-mv-video-col {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .story-mv-video-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    margin: 0 auto !important;
+  }
+
+  /* 6. VISION CONTENT (Appears AFTER Dart Video)
+     Slide from RIGHT: 70px -> 0, duration: 1.7s, delay: 0.30s */
+  .story-editorial-block.story-reveal-vision {
+    order: 3 !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+    opacity: 0;
+    transform: translateX(70px);
+    transition: opacity 1.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.30s;
+    will-change: opacity, transform;
+  }
+
+  .story-editorial-block.story-reveal-vision.is-visible,
+  .story-main-trio-container.is-visible .story-editorial-block.story-reveal-vision {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   .story-act-card {
@@ -2685,18 +2908,9 @@ max-width: 760px;
     order: 3;
   }
 
-  .story-about-card.story-reveal-about,
-  .story-reveal-about,
-  .story-reveal-mission,
-  .story-reveal-vision,
-  .story-reveal-orb,
-  .story-about-card.story-reveal-about.is-visible,
-  .story-reveal-about.is-visible,
-  .story-reveal-mission.is-visible,
-  .story-reveal-vision.is-visible {
-    transform: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
+  .story-about-card {
+    box-shadow: none !important;
+    border-color: transparent !important;
   }
 
   .story-act-title {
@@ -3608,10 +3822,6 @@ max-width: 760px;
 }
 
 @media (max-width: 860px) {
-  .logo-img {
-    height: 60px;
-  }
-
   .video-item {
     flex: 0 0 350px;
   }

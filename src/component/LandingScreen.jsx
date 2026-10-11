@@ -783,11 +783,13 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
   const missionRef = useRef(null);
   const orbRef = useRef(null);
   const visionRef = useRef(null);
+  const mvSectionRef = useRef(null);
 
   const [aboutVisible, setAboutVisible] = useState(false);
-  const [missionVisible, setMissionVisible] = useState(true);
-  const [orbVisible, setOrbVisible] = useState(true);
-  const [visionVisible, setVisionVisible] = useState(true);
+  const [missionVisible, setMissionVisible] = useState(false);
+  const [orbVisible, setOrbVisible] = useState(false);
+  const [visionVisible, setVisionVisible] = useState(false);
+  const [mvVisible, setMvVisible] = useState(false);
 
   // Why Choose MentorCrew? (PACE) section reveal state & ref
   const paceRef = useRef(null);
@@ -887,6 +889,7 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
     const handleIntersect = (entries) => {
       entries.forEach((entry) => {
         const isTargetAbout = entry.target === aboutRef.current;
+        const isTargetMvSection = entry.target === mvSectionRef.current;
         const isTargetMission = entry.target === missionRef.current;
         const isTargetOrb = entry.target === orbRef.current;
         const isTargetVision = entry.target === visionRef.current;
@@ -898,14 +901,16 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
           if (isTargetAbout) {
             setAboutVisible(true);
             setActiveStoryPart('about');
-          } else if (isTargetMission) {
+          } else if (isTargetMvSection || isTargetMission || isTargetOrb || isTargetVision) {
+            setMvVisible(true);
             setMissionVisible(true);
-            setActiveStoryPart('mission');
-          } else if (isTargetOrb) {
             setOrbVisible(true);
-          } else if (isTargetVision) {
             setVisionVisible(true);
-            setActiveStoryPart('vision');
+            if (isTargetVision) {
+              setActiveStoryPart('vision');
+            } else {
+              setActiveStoryPart('mission');
+            }
           } else if (isTargetPace) {
             setPaceVisible(true);
           } else if (isTargetStats) {
@@ -914,8 +919,15 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
             setLoveSectionVisible(true);
           }
         } else {
-          // Keep About, Mission, Vision, and PACE persistently visible once loaded
-          if (isTargetStats) {
+          // Replay entrance animations when scrolled out of view
+          if (isTargetAbout) {
+            setAboutVisible(false);
+          } else if (isTargetMvSection || isTargetMission || isTargetOrb || isTargetVision) {
+            setMvVisible(false);
+            setMissionVisible(false);
+            setOrbVisible(false);
+            setVisionVisible(false);
+          } else if (isTargetStats) {
             setStatsVisible(false);
           } else if (isTargetLove) {
             setLoveSectionVisible(false);
@@ -927,6 +939,7 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
     const observer = new IntersectionObserver(handleIntersect, observerOptions);
 
     if (aboutRef.current) observer.observe(aboutRef.current);
+    if (mvSectionRef.current) observer.observe(mvSectionRef.current);
     if (missionRef.current) observer.observe(missionRef.current);
     if (orbRef.current) observer.observe(orbRef.current);
     if (visionRef.current) observer.observe(visionRef.current);
@@ -942,8 +955,8 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
   const scrollToStoryPart = (part) => {
     let targetEl = null;
     if (part === 'about') targetEl = aboutRef.current;
-    else if (part === 'mission') targetEl = missionRef.current;
-    else if (part === 'vision') targetEl = visionRef.current;
+    else if (part === 'mission') targetEl = mvSectionRef.current || missionRef.current;
+    else if (part === 'vision') targetEl = visionRef.current || mvSectionRef.current;
 
     if (targetEl) {
       const rect = targetEl.getBoundingClientRect();
@@ -1078,27 +1091,29 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
           >
             <div className="story-about-split-layout">
               {/* LEFT COLUMN: ABOUT STORY & THREE P's (~45%) */}
-              <div className="story-about-content-col">
-                <div className="story-about-header">
-                  <span className="story-eyebrow">ABOUT MENTORCREW</span>
-                  <h2 className="story-main-heading">
-                    Building the workforce <span className="text-gradient">of tomorrow.</span>
-                  </h2>
+              <div className={`story-about-content-col ${aboutVisible ? 'is-visible' : ''}`}>
+                <div className={`story-about-text-content ${aboutVisible ? 'is-visible' : ''}`}>
+                  <div className="story-about-header">
+                    <span className="story-eyebrow">ABOUT MENTORCREW</span>
+                    <h2 className="story-main-heading">
+                      Building the workforce <span className="text-gradient">of tomorrow.</span>
+                    </h2>
+                  </div>
+                  <p className="story-about-text">
+                    MentorCrew envisions what India envisions for its current and future workforce - Addressing the Employability Gap and building a qualified and sustainable workforce to meet global demands. MentorCrew endeavors to contribute to this collective vision with its refreshing ideas, proven and improved pedagogical practices and championing innovative and practical approaches to skill development. We at MentorCrew strongly believe that scalability and agility in our solutions can receive a positive stimulus effect by building and leveraging IT tools and digital platforms.
+                  </p>
                 </div>
-                <p className="story-about-text">
-                  MentorCrew envisions what India envisions for its current and future workforce - Addressing the Employability Gap and building a qualified and sustainable workforce to meet global demands. MentorCrew endeavors to contribute to this collective vision with its refreshing ideas, proven and improved pedagogical practices and championing innovative and practical approaches to skill development. We at MentorCrew strongly believe that scalability and agility in our solutions can receive a positive stimulus effect by building and leveraging IT tools and digital platforms.
-                </p>
-                 {/* Visual transition arrow pointing to the next section */}
-            <div className="story-arrow-transition-wrap">
-              <div className="story-arrow-transition-float">
-                <img
-                  src="/arrow.png"
-                  alt="Visual transition to next section"
-                  className="story-transition-arrow-img"
-                  loading="lazy"
-                />
-              </div>
-            </div>
+                {/* Visual transition arrow pointing to the next section */}
+                <div className={`story-arrow-transition-wrap ${aboutVisible ? 'is-visible' : ''}`}>
+                  <div className="story-arrow-transition-float">
+                    <img
+                      src="/arrow.png"
+                      alt="Visual transition to next section"
+                      className="story-transition-arrow-img"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
 
                 {/* People / Purpose / Progress Row */}
                 <div className={`story-three-p-row ${aboutVisible ? 'is-visible' : ''}`}>
@@ -1130,7 +1145,7 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
               </div>
 
               {/* RIGHT COLUMN: LARGE DOMINANT FLYWHEEL VISUAL (~55%) */}
-              <div className="story-about-visual-col">
+              <div className={`story-about-visual-col ${aboutVisible ? 'is-visible' : ''}`}>
                 <div className="story-flywheel-hero-wrap">
                   <div className="story-flywheel-graphic-container">
                     <video
@@ -1159,10 +1174,13 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
         </div>
 
         {/* MISSION & VISION SECTION: LARGE CINEMATIC VIDEO (LEFT) + EDITORIAL MISSION & VISION (RIGHT) */}
-        <div className="section-container story-main-trio-container">
+        <div
+          className={`section-container story-main-trio-container ${mvVisible ? 'is-visible' : ''}`}
+          ref={mvSectionRef}
+        >
           {/* LEFT: LARGE CINEMATIC VIDEO (~54%) */}
           <div
-            className="story-mv-video-col story-reveal-orb is-visible"
+            className={`story-mv-video-col ${mvVisible ? 'is-visible' : ''}`}
             ref={orbRef}
           >
             <div className="story-mv-video-card">
@@ -1179,10 +1197,10 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
           </div>
 
           {/* RIGHT: EDITORIAL MISSION + VISION CONTENT (~46%) */}
-          <div className="story-mv-content-col">
+          <div className={`story-mv-content-col ${mvVisible ? 'is-visible' : ''}`}>
             {/* MISSION */}
             <div
-              className="story-editorial-block story-reveal-mission is-visible"
+              className={`story-editorial-block story-reveal-mission ${mvVisible ? 'is-visible' : ''}`}
               ref={missionRef}
             >
               <div className="story-editorial-header">
@@ -1199,7 +1217,7 @@ const ModernLandingPage = ({ entranceStage = 'completed', onVideoStarted }) => {
 
             {/* VISION */}
             <div
-              className="story-editorial-block story-reveal-vision is-visible"
+              className={`story-editorial-block story-reveal-vision ${mvVisible ? 'is-visible' : ''}`}
               ref={visionRef}
             >
               <div className="story-editorial-header">

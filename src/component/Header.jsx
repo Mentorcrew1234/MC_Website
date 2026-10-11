@@ -1299,11 +1299,11 @@ const Header = ({ onNavigate, onTalkToUs, currentPath = '/', entranceStage = 'co
           }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           @keyframes headerLogoEntranceMobile {
             0% {
               opacity: 0;
-              transform: translateX(-35px);
+              transform: translateX(-25px);
             }
             100% {
               opacity: 1;
@@ -1314,7 +1314,7 @@ const Header = ({ onNavigate, onTalkToUs, currentPath = '/', entranceStage = 'co
           @keyframes headerNavEntranceMobile {
             0% {
               opacity: 0;
-              transform: translateX(35px);
+              transform: translateX(25px);
             }
             100% {
               opacity: 1;
@@ -1323,11 +1323,11 @@ const Header = ({ onNavigate, onTalkToUs, currentPath = '/', entranceStage = 'co
           }
 
           .logo-entrance-waiting {
-            transform: translateX(-35px) !important;
+            transform: translateX(-25px) !important;
           }
 
           .nav-entrance-waiting {
-            transform: translateX(35px) !important;
+            transform: translateX(25px) !important;
           }
 
           .logo-entrance-animating {
@@ -1339,54 +1339,156 @@ const Header = ({ onNavigate, onTalkToUs, currentPath = '/', entranceStage = 'co
           }
 
           .modern-header {
+            width: 100%;
+            max-width: 100vw;
             padding: 0.5rem 0.75rem 0;
             box-sizing: border-box;
           }
 
-          .logo-img {
-            height: 42px;
-          }
-
-          .header-right {
-            gap: 0.85rem;
-          }
-
-          .header-nav {
-            gap: 0.35rem;
-          }
-
-          .pill-nav-btn {
-            height: 32px;
-            padding: 0 0.65rem;
-            font-size: 0.68rem;
-            letter-spacing: 0.05em;
-          }
-
-          .header-cta {
-            height: 34px;
-            padding: 0 0.9rem;
-            font-size: 0.65rem;
-          }
-
           .header-container {
+            width: 100%;
+            max-width: 100%;
             padding: 0;
             gap: 0.5rem;
+            box-sizing: border-box;
           }
 
           .header-logo-panel {
             padding: 0.35rem 0.65rem;
             border-radius: 14px;
+            flex-shrink: 0;
           }
 
           .header-nav-panel {
             padding: 0.35rem 0.65rem;
             border-radius: 14px;
+            flex-shrink: 1;
+            min-width: 0;
+          }
+
+          .modern-header .logo-img {
+            height: 36px;
+            width: auto;
+          }
+
+          .header-right {
+            gap: 0.6rem;
+            width: 100%;
+            justify-content: flex-end;
+            flex-wrap: nowrap;
+          }
+
+          .header-nav {
+            gap: 0.3rem;
+            flex-shrink: 1;
+            flex-wrap: nowrap;
+          }
+
+          .pill-nav-btn {
+            height: 32px;
+            padding: 0 0.65rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.04em;
+            flex-shrink: 0;
+            white-space: nowrap;
+          }
+
+          .header-cta {
+            height: 32px;
+            padding: 0 0.85rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            flex-shrink: 0;
           }
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 480px) {
+          .modern-header {
+            padding: 0.35rem clamp(0.35rem, 1.8vw, 0.5rem) 0;
+          }
+
+          .header-container {
+            gap: clamp(0.2rem, 1vw, 0.35rem);
+          }
+
+          .header-logo-panel {
+            padding: 0.25rem clamp(0.3rem, 1.2vw, 0.45rem);
+            border-radius: 12px;
+          }
+
+          .header-nav-panel {
+            padding: 0.25rem clamp(0.25rem, 1vw, 0.4rem);
+            border-radius: 12px;
+          }
+
+          .modern-header .logo-img {
+            height: clamp(26px, 6.8vw, 30px);
+          }
+
+          .header-right {
+            gap: clamp(0.2rem, 0.8vw, 0.35rem);
+          }
+
           .header-nav {
-            gap: 0.25rem;
+            gap: clamp(0.12rem, 0.5vw, 0.22rem);
+          }
+
+          .pill-nav-btn {
+            height: 28px;
+            padding: 0 clamp(0.28rem, 1vw, 0.42rem);
+            font-size: clamp(0.56rem, 1.6vw, 0.64rem);
+            letter-spacing: 0.015em;
+            gap: 0.12rem;
+          }
+
+          .header-cta {
+            height: 28px;
+            padding: 0 clamp(0.4rem, 1.3vw, 0.55rem);
+            font-size: clamp(0.56rem, 1.6vw, 0.64rem);
+            letter-spacing: 0.015em;
+          }
+        }
+
+        @media (max-width: 375px) {
+          .modern-header {
+            padding: 0.3rem 0.3rem 0;
+          }
+
+          .header-container {
+            gap: 0.2rem;
+          }
+
+          .header-logo-panel {
+            padding: 0.2rem 0.25rem;
+          }
+
+          .header-nav-panel {
+            padding: 0.2rem 0.25rem;
+          }
+
+          .modern-header .logo-img {
+            height: 24px;
+          }
+
+          .header-right {
+            gap: 0.2rem;
+          }
+
+          .header-nav {
+            gap: 0.1rem;
+          }
+
+          .pill-nav-btn {
+            height: 26px;
+            padding: 0 0.25rem;
+            font-size: 0.54rem;
+          }
+
+          .header-cta {
+            height: 26px;
+            padding: 0 0.35rem;
+            font-size: 0.54rem;
           }
         }
       `}</style>
